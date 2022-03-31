@@ -1,0 +1,33 @@
+------------------INSTALAR PIP EN WINDOWS--------------------------
+Desde la carpeta donde se encuentra instalado Python (preferentemente versión 3.9.7 64 bits):
+En mi caso: C:\Users\areyc\AppData\Local\Programs\Python\Python39>
+1. Ejecutar:
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+2. Ejecutar: 
+python get-pip.py
+
+
+Configuración - Acerca de - Configuración avanzada del sistema - Variables de entorno - Variables del sistema -> Path -> 
+Nueva -> Pegar directorio donde se instalo PIP (Casi siempre es en \AppData\Local\Programs\Python\Python39\Scripts)
+En mi caso: C:\Users\areyc\AppData\Local\Programs\Python\Python39\Scripts
+
+Referencia: https://phoenixnap.com/kb/install-pip-windows
+
+------------------INSTALAR NUMPY EN WINDOWS--------------------------
+pip install numpy
+pip install opencv-python
+pip install matplotlib (Opcional)
+pip install scikit-image
+
+
+
+
+
+
+
+
+
+
+
+****Areyci Huerta Patiño***
+
