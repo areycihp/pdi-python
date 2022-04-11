@@ -4,7 +4,7 @@ from skimage import io
 import numpy as np
 import matplotlib.pyplot as plt
 
-imagen = io.imread("Images/A_1.jpg",0)
+imagen = io.imread("Images/B_dark.jpg",0)
 
 # Estiramiento de contraste
 p2, p98 = np.percentile(imagen, (2,98))

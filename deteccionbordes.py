@@ -6,7 +6,7 @@ from skimage.color import rgb2gray
 import matplotlib.pyplot as plt
 
 # Abrimos la imagen
-imagen = io.imread("Images/A_2.jpg")
+imagen = io.imread("Images/B_dark.jpg")
 imagen_g = rgb2gray(imagen)
 
 # Filtros: sobel, roberts, prewitt
