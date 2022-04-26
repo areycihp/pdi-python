@@ -7,7 +7,7 @@ from skimage.color import rgb2gray
 import matplotlib.pyplot as plt
 
 # Lectura de inagen original
-image = cv2.imread('Images/B_2.jpg')
+image = cv2.imread('Images/B_dark.jpg')
 
 # Da un nombre o titulo a la ventana
 cv2.namedWindow("Original", cv2.WINDOW_NORMAL)
@@ -19,7 +19,7 @@ cv2.resizeWindow("Original", 300, 450)
 cv2.imshow("Original", image)
 
 # Convierte imagen a Escala de grises
-gray = cv2.imread('Images/B_2.jpg', cv2.IMREAD_GRAYSCALE)
+gray = cv2.imread('Images/B_dark.jpg', cv2.IMREAD_GRAYSCALE)
 
 # Binariza imagen
 t, dst = cv2.threshold(gray, 110, 255, cv2.THRESH_BINARY)

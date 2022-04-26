@@ -1,0 +1,2 @@
+-------------------- Ejemplos momentos de HU ------------------------------------
+https://python.hotexamples.com/examples/skimage.measure/-/moments_hu/python-moments_hu-function-examples.html

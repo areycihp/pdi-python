@@ -16,3 +16,4 @@ plt.show()
 ##plt.subplot(212)
 ##io.imshow(edge)
 ##io.show()
+##Resultado similar a suaviza_resalta_contornos
