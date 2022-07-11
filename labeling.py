@@ -20,7 +20,7 @@ from scipy import ndimage
 from skimage.feature import canny
 
 #Lectura de imagen | Image reading
-image = cv2.imread("Images/B_dark.jpg")
+image = cv2.imread("Images/B_dark.png")
 
 #Escala de grises | Grayscale
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
