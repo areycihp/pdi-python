@@ -22,7 +22,8 @@ def algoritmo_region_bordes(imagen):
     kernel = cv.getStructuringElement(cv.MORPH_RECT, (3, 3))
     apertura = cv.morphologyEx(im_binaria, cv.MORPH_OPEN, kernel=kernel, iterations=2)    
     dilatacion = cv.dilate(apertura, kernel, iterations=3)
-    
+    tamanio_imagen('Imagen dilatada')
+    cv.imshow("Imagen dilatada", dilatacion)
 
     # Umbralización técnica de segmentación     
     th, im_umbral = cv.threshold(apertura, 80, 150, cv.THRESH_BINARY_INV);
