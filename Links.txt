@@ -1,0 +1,17 @@
+https://datasmarts.net/es/como-dilatar-y-erosionar-imagenes-en-scikit-image/
+http://www.laurence.com.ar/artes/comun/Apuntes%20procesamiento%20digital%20de%20imagenes.pdf#:~:text=Utilizan%20operaciones%20como%20el%20preprocesamiento%20de%20imagenpara%20reducir,y%20sus%20salidas%20tambi%C3%A9n.%20Procesos%20de%20Nivel%20Medio%3A
+
+funciones dilatación:
+https://www.codetd.com/es/article/12186288
+https://www.coseries.com/morphological-transformations-in-python-using-opencv/
+
+Filtros:
+http://www4.ujaen.es/~satorres/practicas/practica3_vc.pdf#:~:text=La%20mayor%C3%ADa%20de%20las%20t%C3%A9cnicas%20para%20detectar%20bordes,1.1.%20Operadores%20basadas%20en%20la%20primera%20derivada%20%28Gradiente%29.
+https://1library.co/article/funci%C3%B3n-bordes-sobel-filtros-im%C3%A1genes-digitales.6zkxg8my#:~:text=3.4.6%20Funci%C3%B3n%20bordes%20de%20Sobel.%20Esta%20funci%C3%B3n%20es,del%20gradiente%20y%20la%20direcci%C3%B3n%20del%20vector%20gradiente.
+http://www.bibliotecacpa.org.ar/greenstone/collect/salagr/index/assoc/HASH018a/73337b8c.dir/doc.pdf
+https://es.slideshare.net/omarspp/segmentacin-de-imagen
+https://www.boletin.upiita.ipn.mx/index.php/ciencia/669-cyt-numero-55/1293-extraccion-de-bordes-operadores-sobel-prewitt-y-roberts
+
+Momentos de Hu:
+https://learnopencv.com/shape-matching-using-hu-moments-c-python/
+https://programmerclick.com/article/4503787427/
