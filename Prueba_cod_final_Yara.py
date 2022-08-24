@@ -3,8 +3,6 @@
 import cv2 as cv
 import numpy as np
 
-
-
 # Comienza algoritmo
 def algoritmo_region_bordes(imagen):    
     # Filtro de conservación de bordes y eliminación de ruido 
