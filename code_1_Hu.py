@@ -126,7 +126,7 @@ def tamanio_imagen(nombre_imagen):
     cv.resizeWindow(nombre_imagen, 500, 550)
 
 # Adquisición de imagen (1)
-imagen = cv.imread('Images/Y.jpeg')
+imagen = cv.imread('Images/W.jpeg')
 tamanio_imagen('Imagen original')
 cv.imshow('Imagen original', imagen)
 # Procesamiento de imagen

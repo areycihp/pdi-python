@@ -95,7 +95,7 @@ def tamanio_imagen(nombre_imagen):
 
 
 # Cargamos imagen
-imagen = cv.imread('Images/B_dark.jpg')
+imagen = cv.imread('Images/D.jpeg')
 tamanio_imagen('Imagen inicial')
 cv.imshow('Imagen inicial', imagen)
 algoritmo_region_bordes(imagen)
