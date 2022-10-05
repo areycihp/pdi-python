@@ -10,8 +10,8 @@ from math import copysign, log10
 def algoritmo_region_bordes(imagen):    
     # Eliminación de ruido - Preprocesamiento (2)
     im_ruido = cv.pyrMeanShiftFiltering(imagen,sp=30,sr=50)
-    # tamanio_imagen('Imagen sin ruido')
-    # cv.imshow('Imagen sin ruido', im_ruido)
+    tamanio_imagen('Imagen sin ruido')
+    cv.imshow('Imagen sin ruido', im_ruido)
     
     # Escala de grises - Preprocesamiento (3)
     im_gris = cv.cvtColor(im_ruido, cv.COLOR_BGR2GRAY)
@@ -21,7 +21,7 @@ def algoritmo_region_bordes(imagen):
 
     # Detección de bordes - Segmentación (5)
     img_filtro1 = filters.sobel(im_binaria)
-
+    
     # Operaciones morfologicas - Segmentación (6)
     kernel = cv.getStructuringElement(cv.MORPH_RECT, (3, 3))
     apertura = cv.morphologyEx(im_binaria, cv.MORPH_OPEN, kernel=kernel, iterations=2)    
@@ -50,8 +50,7 @@ def algoritmo_region_bordes(imagen):
     ret, im_binaria2 = cv.threshold(im_combinada, 0, 255, cv.THRESH_BINARY | cv.THRESH_OTSU)
     tamanio_imagen('Imagen binaria rellena')
     cv.imshow('Imagen binaria rellena', im_binaria2) #--- se usará para momentos ---
-    rotacion_imagen(im_binaria2)
-    #momentos(im_binaria2)
+    momentos(im_binaria2)
 
     # Etiquetado - Técnicas y funciones de python (13)
     distancia = cv.distanceTransform(im_binaria2, cv.DIST_L2, 3)
@@ -80,36 +79,25 @@ def algoritmo_region_bordes(imagen):
     cv.drawContours (imagen, contorno, -1,(128, 0, 128),3)
 
 #Momentos de Hu (2.1)
-def momentos(imagen):
-    mostrarMomentos = True
-    moments = cv.moments(imagen)
-    huMoments = cv.HuMoments(moments)
+def momentos(imagen,entrada):
+    d1 = cv.matchShapes(imagen,entrada,cv.CONTOURS_MATCH_I1,0)
+    print(d1)
+    d2 = cv.matchShapes(imagen,entrada,cv.CONTOURS_MATCH_I2,0)
+    print(d2)
+    d3 = cv.matchShapes(imagen,entrada,cv.CONTOURS_MATCH_I3,0)
+    print(d3)
+    # mostrarMomentos = True
+    # moments = cv.moments(imagen)
+    # huMoments = cv.HuMoments(moments)
     
-    for i in range(0,7):
-        if mostrarMomentos:
-            print("H",i,": ","{:.3f}".format(-1*copysign(1.0,\
-                    huMoments[i])*log10(abs(huMoments[i]))),\
-                    end='\n')
-        else:
-            print("{:.5f}".format(huMoments[i]),end=' ')
-
-
-# Rotación de imagen
-def rotacion_imagen(nombre_imagen):
-    imagen = nombre_imagen
-
-    (h, w) = imagen.shape[:2]
-    centro = (w / 2, h / 2)
-    angulo = 35
-    escala = 1
-
-    #Primer rotación a 15 grados
-    #Segunda rotación a 35 grados
-    M = cv.getRotationMatrix2D(centro, angulo, escala)
-    rotated = cv.warpAffine(imagen, M, (w, h))
-    tamanio_imagen('Rotacion')
-    cv.imshow('Rotacion', rotated)
-    momentos(rotated)
+    # for i in range(0,7):
+    #     if mostrarMomentos:
+    #         print("{:.3f}".format(-1*copysign(1.0,\
+    #                 huMoments[i])*log10(abs(huMoments[i]))),\
+    #                 end='\n')
+    #     else:
+    #         print("{:.5f}".format(huMoments[i]),end=' ')
+    
 
 # Tamaño de imagen
 def tamanio_imagen(nombre_imagen):
@@ -117,10 +105,18 @@ def tamanio_imagen(nombre_imagen):
     cv.resizeWindow(nombre_imagen, 500, 550)
 
 # Adquisición de imagen (1)
-imagen = cv.imread('Images/W.jpeg')
-# tamanio_imagen('Imagen original')
-# cv.imshow('Imagen original', imagen)
+imagen = cv.imread('Images/Y.jpeg')
+tamanio_imagen('Imagen original')
+cv.imshow('Imagen original', imagen)
 # Procesamiento de imagen
 algoritmo_region_bordes(imagen)
+
+#Imagen de entrada
+entrada = cv.imread('Images/Y2.jpeg')
+tamanio_imagen('Imagen entrada')
+cv.imshow('Imagen entrada', entrada)
+# Procesamiento de imagen
+algoritmo_region_bordes(entrada)
+
 cv.waitKey(0)
 cv.destroyAllWindows()

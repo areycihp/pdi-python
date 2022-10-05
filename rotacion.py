@@ -6,16 +6,16 @@ def tamanio_imagen(nombre_imagen):
     cv.namedWindow(nombre_imagen, cv.WINDOW_NORMAL)
     cv.resizeWindow(nombre_imagen, 500, 550)
 
-image = cv.imread('Images/G.jpeg')
+image = cv.imread('Images/Y2.jpeg')
 #imagen = cv.imread('Images/A.jpeg')
 tamanio_imagen('Imagen original')
 cv.imshow('Imagen original', image)
 
 (h, w) = image.shape[:2]
 center = (w / 2, h / 2)
-angle = 15
+angle = 45
 scale = 1
-angle2 = 35
+angle2 = 90
 
 #First rotation at 15 grades
 M = cv.getRotationMatrix2D(center, angle, scale)
