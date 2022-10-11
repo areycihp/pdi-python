@@ -1,6 +1,7 @@
 # Librerias
 import cv2 as cv
 import numpy as np
+import imutils
 from skimage import io
 from skimage import filters
 
@@ -62,7 +63,7 @@ def algoritmo_region_bordes(imagen):
     im_combinada = im_umbral | im_seg_inv
     # tamanio_imagen('Imagen combinada rellena')
     # cv.imshow("Imagen combinada rellena", im_combinada)
-
+    
     # Binarización de otsu - Segmentación (12)
     ret, im_binaria2 = cv.threshold(im_combinada, 0, 255, cv.THRESH_BINARY | cv.THRESH_OTSU)
     tamanio_imagen('Imagen binaria rellena')
@@ -126,7 +127,8 @@ def tamanio_imagen(nombre_imagen):
     cv.resizeWindow(nombre_imagen, 500, 550)
 
 # Adquisición de imagen (1)
-imagen = cv.imread('Images/A2.jpg')
+imagen = cv.imread('Images/Ed.jpg')
+#imagen = imutils.rotate(imagen, angle=15)
 tamanio_imagen('Imagen original')
 cv.imshow('Imagen original', imagen)
 # Procesamiento de imagen
