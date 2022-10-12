@@ -15,3 +15,9 @@ https://www.boletin.upiita.ipn.mx/index.php/ciencia/669-cyt-numero-55/1293-extra
 Momentos de Hu:
 https://learnopencv.com/shape-matching-using-hu-moments-c-python/
 https://programmerclick.com/article/4503787427/
+
+Descriptores de imágenes:
+https://docs.python.org/es/dev/howto/descriptor.html#descriptor-howto-guide
+
+Kivy:
+https://mireal.me/tutorial-de-kivy-python-crea-aplicaciones-moviles-en-python/

@@ -1,7 +1,6 @@
 # Librerias
 import cv2 as cv
 import numpy as np
-import imutils
 from skimage import io
 from skimage import filters
 
@@ -46,6 +45,7 @@ def algoritmo_region_bordes(imagen):
 
     # Combinación de imagenes para obtener imagen rellenada - Segmentación (11)
     im_combinada = im_umbral | im_seg_inv
+
     # Binarización de otsu - Segmentación (12)
     ret, im_binaria2 = cv.threshold(im_combinada, 0, 255, cv.THRESH_BINARY | cv.THRESH_OTSU)
     tamanio_imagen('Imagen binaria rellena')
@@ -79,18 +79,24 @@ def algoritmo_region_bordes(imagen):
     cv.drawContours (imagen, contorno, -1,(128, 0, 128),3)
 
 #Momentos de Hu (2.1)
-def momentos(imagen):
-    mostrarMomentos = True
-    moments = cv.moments(imagen)
-    huMoments = cv.HuMoments(moments)
+def momentos(imagen,entrada):
+    d1 = cv.matchShapes(imagen,entrada,cv.CONTOURS_MATCH_I1,0)
+    print(d1)
+    d2 = cv.matchShapes(imagen,entrada,cv.CONTOURS_MATCH_I2,0)
+    print(d2)
+    d3 = cv.matchShapes(imagen,entrada,cv.CONTOURS_MATCH_I3,0)
+    print(d3)
+    # mostrarMomentos = True
+    # moments = cv.moments(imagen)
+    # huMoments = cv.HuMoments(moments)
     
-    for i in range(0,7):
-        if mostrarMomentos:
-            print("{:.3f}".format(-1*copysign(1.0,\
-                    huMoments[i])*log10(abs(huMoments[i]))),\
-                    end='\n')
-        else:
-            print("{:.5f}".format(huMoments[i]),end=' ')
+    # for i in range(0,7):
+    #     if mostrarMomentos:
+    #         print("{:.3f}".format(-1*copysign(1.0,\
+    #                 huMoments[i])*log10(abs(huMoments[i]))),\
+    #                 end='\n')
+    #     else:
+    #         print("{:.5f}".format(huMoments[i]),end=' ')
     
 
 # Tamaño de imagen
@@ -99,11 +105,18 @@ def tamanio_imagen(nombre_imagen):
     cv.resizeWindow(nombre_imagen, 500, 550)
 
 # Adquisición de imagen (1)
-imagen = cv.imread('Images/Ay.jpg') 
-#imagen = imutils.rotate(imagen, angle=15)
+imagen = cv.imread('Images/Y.jpeg')
 tamanio_imagen('Imagen original')
 cv.imshow('Imagen original', imagen)
 # Procesamiento de imagen
 algoritmo_region_bordes(imagen)
+
+#Imagen de entrada
+entrada = cv.imread('Images/Y2.jpeg')
+tamanio_imagen('Imagen entrada')
+cv.imshow('Imagen entrada', entrada)
+# Procesamiento de imagen
+algoritmo_region_bordes(entrada)
+
 cv.waitKey(0)
 cv.destroyAllWindows()
