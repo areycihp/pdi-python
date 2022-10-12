@@ -82,7 +82,7 @@ def algoritmo_region_bordes(imagen):
 
 
 # Cargamos imagen
-imagen = cv.imread('Images/B_dark_v2.jpg')
+imagen = cv.imread('Images/Ey2.jpg')
 cv.imshow('Imagen inicial', imagen)
 algoritmo_region_bordes(imagen)
 cv.waitKey(0)

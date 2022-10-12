@@ -127,7 +127,7 @@ def tamanio_imagen(nombre_imagen):
     cv.resizeWindow(nombre_imagen, 500, 550)
 
 # Adquisición de imagen (1)
-imagen = cv.imread('Images/Ed.jpg')
+imagen = cv.imread('Images/Ay.jpg') 
 #imagen = imutils.rotate(imagen, angle=15)
 tamanio_imagen('Imagen original')
 cv.imshow('Imagen original', imagen)
