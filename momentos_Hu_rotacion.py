@@ -1,6 +1,7 @@
 # Librerias
 import cv2 as cv
 import numpy as np
+import imutils
 from skimage import io
 from skimage import filters
 
@@ -99,6 +100,9 @@ def tamanio_imagen(nombre_imagen):
 
 # Adquisición de imagen (1)
 imagen = cv.imread('Images/Yy.jpg') 
+#Rotación de imagen a 15° y 25°
+imagen = imutils.rotate(imagen, angle=15)
+#imagen = imutils.rotate(imagen, angle=25)
 tamanio_imagen('Imagen original')
 cv.imshow('Imagen original', imagen)
 # Procesamiento de imagen
