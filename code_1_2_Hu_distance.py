@@ -80,7 +80,7 @@ def algoritmo_region_bordes(imagen):
  
 def distance(im1):
 
-    im2 = cv.imread("Images/tt.jpeg",cv.IMREAD_GRAYSCALE)
+    im2 = cv.imread("Images/Ay.jpg",cv.IMREAD_GRAYSCALE)
     # im3 = cv.imread("Images/B_dark.jpeg",cv.IMREAD_GRAYSCALE)
 
     #m1 = cv.matchShapes(im1,im1,cv.CONTOURS_MATCH_I2,0)
@@ -89,11 +89,11 @@ def distance(im1):
  
     print("Distancia entre \n-------------------------")
  
-    print("Imagen original y con cámara trasera: {}".format(m2))
+    print("Imagen Are comp. Imagen Yara: {}".format(m2))
     # print("BC original and bt (trasera) : {}".format(m2))
     # print("BC original and B_dark : {}".format(m3))
  
  # Adquisición de imagen (1)
-imagen = cv.imread('Images/B.jpeg')
+imagen = cv.imread('Images/A.jpg')
 # Procesamiento de imagen
 algoritmo_region_bordes(imagen)

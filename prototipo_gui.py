@@ -22,7 +22,7 @@ class prototipo_gui(App):
 
         #Imagen
         self.window.add_widget(Image(
-            source = 'Images/logo.jpeg',
+            source = 'Images/logo.jpg',
             size_hint = (2.0, 2.0)
             ))
 

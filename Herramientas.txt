@@ -1,2 +1,5 @@
 -------------------- Ejemplos momentos de HU ------------------------------------
 https://python.hotexamples.com/examples/skimage.measure/-/moments_hu/python-moments_hu-function-examples.html
+
+-------------------- Guardar imagen opencv --------------------------------------
+https://aihints.com/how-to-save-an-image-in-opencv-python/#:~:text=How%20to%20Save%20an%20Image%20in%20OpenCV%20Python,write%20this%20code%20to%20save%20the%20image.%20
