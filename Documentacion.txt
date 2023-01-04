@@ -23,8 +23,8 @@ pip install scikit-image
 pip3 install torchvision
 https://stackoverflow.com/questions/59800318/how-to-install-torch-in-python
 
-
-
+------------------INSTALAR PYODBC EN WINDOWS--------------------------
+pip install pyodbc
 
 
 

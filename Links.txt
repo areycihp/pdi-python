@@ -36,3 +36,6 @@ https://github.com/opencv/opencv/tree/master/data/haarcascades
 https://docs.opencv.org/4.3.0/dc/d88/tutorial_traincascade.html
 
 
+Connect to access database:
+https://pythoninoffice.com/python-ms-access-database-pyodbc/
+https://stackoverflow.com/questions/57635782/how-to-connect-python-to-microsoft-access-database-file
