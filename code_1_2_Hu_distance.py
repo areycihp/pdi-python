@@ -79,8 +79,8 @@ def algoritmo_region_bordes(imagen):
     cv.drawContours (imagen, contorno, -1,(128, 0, 128),3)
  
 def distance(im1):
-
-    im2 = cv.imread("Images/tt.jpeg",cv.IMREAD_GRAYSCALE)
+#imagen para comparar
+    im2 = cv.imread("Images/Z.jpeg",cv.IMREAD_GRAYSCALE)
     # im3 = cv.imread("Images/B_dark.jpeg",cv.IMREAD_GRAYSCALE)
 
     #m1 = cv.matchShapes(im1,im1,cv.CONTOURS_MATCH_I2,0)
@@ -94,6 +94,6 @@ def distance(im1):
     # print("BC original and B_dark : {}".format(m3))
  
  # Adquisición de imagen (1)
-imagen = cv.imread('Images/B.jpeg')
+imagen = cv.imread('Images/Zy.jpg')
 # Procesamiento de imagen
 algoritmo_region_bordes(imagen)
