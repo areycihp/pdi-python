@@ -8,9 +8,11 @@ cred = credentials.Certificate("clave.json") #clave privada
 firebase_admin.initialize_app(cred)
 
 #Inicializamos firestore 
-#Crear colección de prueba
-db = firestore.client()
-def agregarDatos(email, password):
-    data = {"Email":email, "Contraseña":password}
-    doc_ref = db.collection("users").add(data)
-agregarDatos("yara.rivas@gmail.com","1234")  
+#Crear colección de pruebas
+
+
+#db = firestore.client()
+#def agregarDatos(email, password):
+#    data = {"Email":email, "Contraseña":password}
+#    doc_ref = db.collection("users").add(data)
+#agregarDatos("yara.rivas@gmail.com","1234")  
