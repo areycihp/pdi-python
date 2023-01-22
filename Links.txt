@@ -20,18 +20,25 @@ Descriptores de imágenes:
 https://docs.python.org/es/dev/howto/descriptor.html#descriptor-howto-guide
 
 Kivy:
+https://kivy.org/
 https://mireal.me/tutorial-de-kivy-python-crea-aplicaciones-moviles-en-python/
 
 
 MediaPipe:
 http://omes-va.com/mediapipe-hands-python/
 
-OpenCV realtime:https://towardsdatascience.com/implementing-real-time-object-detection-system-using-pytorch-and-opencv-70bac41148f7
+OpenCV realtime:
+https://towardsdatascience.com/implementing-real-time-object-detection-system-using-pytorch-and-opencv-70bac41148f7
 
 Lectura de imagen en tiempo real:
 https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_gui/py_video_display/py_video_display.html
+https://www.geeksforgeeks.org/extract-images-from-video-in-python/
+https://stackoverflow.com/questions/58851000/capture-image-from-video-every-5-seconds-and-save-picutres-using-python-openc
 
-Haar cascades:
+Kivy Camara:
+https://kivy.org/doc/stable/api-kivy.uix.camera.html
+
+Haar cascades:**
 https://github.com/opencv/opencv/tree/master/data/haarcascades
 https://docs.opencv.org/4.3.0/dc/d88/tutorial_traincascade.html
 
@@ -39,3 +46,23 @@ https://docs.opencv.org/4.3.0/dc/d88/tutorial_traincascade.html
 Connect to access database:
 https://pythoninoffice.com/python-ms-access-database-pyodbc/
 https://stackoverflow.com/questions/57635782/how-to-connect-python-to-microsoft-access-database-file
+
+Capturar video:
+https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_gui/py_video_display/py_video_display.html
+
+
+Gui,
+Boxlayout:
+https://barcelonageeks.com/python-agregar-una-imagen-en-kivy-usando-un-archivo-kv/#:~:text=Para%20usar%20el%20widget%20de%20imagen%2C%20debe%20importar%3A,tiene%20toda%20la%20funcionalidad%20relacionada%20con%20las%20im%C3%A1genes.
+https://kivy.org/doc/stable/api-kivy.uix.boxlayout.html
+https://stackoverflow.com/questions/54551968/python-kivy-camera-and-changing-screen
+
+Abrir ventana nueva con botón:}
+https://stackoverflow.com/questions/56609278/how-to-open-new-window-on-button-press-event-in-kivy	
+https://docs.python.org/2/library/subprocess.html#popen-objects
+
+OpenCV:
+https://docs.opencv.org/2.4/modules/highgui/doc/reading_and_writing_images_and_video.html
+
+Texture:
+https://kivy.org/doc/stable/api-kivy.graphics.texture.html
