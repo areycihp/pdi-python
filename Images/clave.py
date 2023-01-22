@@ -10,6 +10,8 @@ from math import copysign, log10
 def algoritmo_region_bordes(imagen):    
     # Eliminación de ruido - Preprocesamiento (2)
     im_ruido = cv.pyrMeanShiftFiltering(imagen,sp=30,sr=50)
+    tamanio_imagen('Imagen sin ruido')
+    cv.imshow('Imagen sin ruido', im_ruido)
     
     # Escala de grises - Preprocesamiento (3)
     im_gris = cv.cvtColor(im_ruido, cv.COLOR_BGR2GRAY)
@@ -46,11 +48,9 @@ def algoritmo_region_bordes(imagen):
 
     # Binarización de otsu - Segmentación (12)
     ret, im_binaria2 = cv.threshold(im_combinada, 0, 255, cv.THRESH_BINARY | cv.THRESH_OTSU)
-    #--- se usará para momentos ---
-    #tamanio_imagen('Imagen binaria rellena')
-    #cv.imshow('Imagen binaria rellena', im_binaria2) 
-    #momentos(im_binaria2)
-    distance(im_binaria2)
+    tamanio_imagen('Imagen binaria rellena')
+    cv.imshow('Imagen binaria rellena', im_binaria2) #--- se usará para momentos ---
+    momentos(im_binaria2)
 
     # Etiquetado - Técnicas y funciones de python (13)
     distancia = cv.distanceTransform(im_binaria2, cv.DIST_L2, 3)
@@ -77,23 +77,46 @@ def algoritmo_region_bordes(imagen):
     contorno,ret = cv.findContours(im_binaria2, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
     #Dibuja el contorno color lila
     cv.drawContours (imagen, contorno, -1,(128, 0, 128),3)
- 
-def distance(im1):
-#imagen para comparar
-    im2 = cv.imread("Images/N.jpg",cv.IMREAD_GRAYSCALE)
-    # im3 = cv.imread("Images/B_dark.jpeg",cv.IMREAD_GRAYSCALE)
 
-    #m1 = cv.matchShapes(im1,im1,cv.CONTOURS_MATCH_I2,0)
-    m2 = cv.matchShapes(im1,im2,cv.CONTOURS_MATCH_I2,0)
-    # m3 = cv.matchShapes(im1,im3,cv.CONTOURS_MATCH_I2,0)
- 
-    print("Distancia entre \n-------------------------")
- 
-    print("Imagen Are comp. Imagen Yara: {}".format(m2))
-    # print("BC original and bt (trasera) : {}".format(m2))
-    # print("BC original and B_dark : {}".format(m3))
- 
- # Adquisición de imagen (1)
-imagen = cv.imread('Images/Ny.jpg') 
+#Momentos de Hu (2.1)
+def momentos(imagen,entrada):
+    d1 = cv.matchShapes(imagen,entrada,cv.CONTOURS_MATCH_I1,0)
+    print(d1)
+    d2 = cv.matchShapes(imagen,entrada,cv.CONTOURS_MATCH_I2,0)
+    print(d2)
+    d3 = cv.matchShapes(imagen,entrada,cv.CONTOURS_MATCH_I3,0)
+    print(d3)
+    # mostrarMomentos = True
+    # moments = cv.moments(imagen)
+    # huMoments = cv.HuMoments(moments)
+    
+    # for i in range(0,7):
+    #     if mostrarMomentos:
+    #         print("{:.3f}".format(-1*copysign(1.0,\
+    #                 huMoments[i])*log10(abs(huMoments[i]))),\
+    #                 end='\n')
+    #     else:
+    #         print("{:.5f}".format(huMoments[i]),end=' ')
+    
+
+# Tamaño de imagen
+def tamanio_imagen(nombre_imagen):
+    cv.namedWindow(nombre_imagen, cv.WINDOW_NORMAL)
+    cv.resizeWindow(nombre_imagen, 500, 550)
+
+# Adquisición de imagen (1)
+imagen = cv.imread('Images/A.jpeg')
+tamanio_imagen('Imagen original')
+cv.imshow('Imagen original', imagen)
 # Procesamiento de imagen
 algoritmo_region_bordes(imagen)
+
+#Imagen de entrada
+entrada = cv.imread('Images/Ay.jpeg')
+tamanio_imagen('Imagen entrada')
+cv.imshow('Imagen entrada', entrada)
+# Procesamiento de imagen
+algoritmo_region_bordes(entrada)
+
+cv.waitKey(0)
+cv.destroyAllWindows()

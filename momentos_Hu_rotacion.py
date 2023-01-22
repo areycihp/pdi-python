@@ -100,10 +100,11 @@ def tamanio_imagen(nombre_imagen):
 
 # Adquisición de imagen (1)
 imagen = cv.imread('Images/Yy.jpg') 
-#Rotación de imagen a 15° y 25°
-imagen = imutils.rotate(imagen, angle=15)
-#imagen = imutils.rotate(imagen, angle=25)
+#Rotación de imagen a 15° y 35°
+#imagen = imutils.rotate(imagen, angle=15)
+imagen = imutils.rotate(imagen, angle=35)
 tamanio_imagen('Imagen original')
+print("Imagen Y")
 cv.imshow('Imagen original', imagen)
 # Procesamiento de imagen
 algoritmo_region_bordes(imagen)
