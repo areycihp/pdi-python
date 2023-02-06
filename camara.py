@@ -67,20 +67,24 @@ class Camara(BoxLayout):
         self.camera_button.disabled = True
         if not self.camera_display.texture:
             self.camera_button.text = "Iniciando cámara"
+            print("cero if")
             if self._cap is None:
+                
                 self._cap = cv2.VideoCapture(captura)
 
             if self._cap is None or not self._cap.isOpened():
+                
                 self.camera_button.text = "Cámara no disponible"
                 Clock.schedule_once(self._btn_restart, 2)
             else:
                 
                 self.camera_button.text = "Detener"
+                #Se llama a la función cada cierto tiempo
                 Clock.schedule_interval(self.update, 1.0 / 30.0)
                 self.camera_button.disabled = False    
                 
         else:
-            
+            # print("cuarto if")
             Clock.unschedule(self.update)
             self.camera_display.texture = None
             self._btn_restart()
@@ -90,7 +94,8 @@ class Camara(BoxLayout):
         self.camera_button.disabled = False
 
     def update(self, dt):
-        
+        # Aquí corre la captura
+
         try:
             # Se crea la carpeta
             if not os.path.exists('Images/RTImages'):
@@ -114,33 +119,37 @@ class Camara(BoxLayout):
         except OSError:
             print ('Error: No se ha podido crear la carpeta nueva :(')
 
-        frame_actual = 0
+        
         ret, img = self._cap.read()
         img = cv2.flip(img, 0)
         texture1 = Texture.create(size=(img.shape[1], img.shape[0]), colorfmt='bgr')
         texture1.blit_buffer(img.tobytes(), colorfmt='bgr', bufferfmt='ubyte')
         # texture1.blit_buffer(img.tostring(), colorfmt='bgr', bufferfmt='ubyte')
         self.camera_display.texture = texture1
-        
-        # Condición para tomar capturas mientras la cámara está abierta
-        # while():
-        #     print("entró")
-    
-        #     # #Se usa el tiempo para tomar una captura del video cada cierto tiempo
-        #     # start_time = time.time()
-    
-        #     # # Leer el frame 
-        #     # ret,frame = self._cap.read()
-            
-        #     # nombre = './RTImages/frame' + str(frame_actual) + '.jpg'
-        #     # print ('Creando...' + nombre)
-    
-        #     # # Escribe en la carpeta las nuevas imágenes
-        #     # cv2.imwrite(nombre, frame)
-            
-        #     # spent = time.time() - start_time # tiempo que se uso en las tareas de arriba
 
-        #     # time.sleep(5 - spent)
+        frame_actual = dt
+
+        
+        ## Condición para tomar capturas mientras la cámara está abierta
+        # while(True):
+        print("entró"+ str(frame_actual))
+        
+        ## Se usa el tiempo para tomar una captura del video cada cierto tiempo
+        #start_time = time.time()
+
+        ## Leer el frame 
+        ret,frame = self._cap.read()
+        
+        nombre = 'Images/RTImages/frame' + str(frame_actual) + '.jpg'
+        print ('Creando...' + nombre)
+
+        ## Escribe en la carpeta las nuevas imágenes
+        cv2.imwrite(nombre, img)
+        print ('Guardando...' + nombre)
+        #spent = time.time() - start_time # tiempo que se uso en las tareas de arriba
+
+        #time.sleep(5 - spent)
+        frame_actual += 1;
 
 
 #Para ejecutar la ventana
