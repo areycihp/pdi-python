@@ -94,20 +94,7 @@ class Camara(BoxLayout):
         self.camera_button.disabled = False
 
     def update(self, dt):
-        # Aquí corre la captura
-
-        try:
-            # Se crea la carpeta
-            if not os.path.exists('Images/RTImages'):
-                os.makedirs('Images/RTImages')
-        
-        # Si no se puede crear, muestra un error
-        except OSError:
-            print ('Error: No se ha podido crear la carpeta nueva :(')
-        
-
-        # Se trabaja con la captura en tiempo real
-        # real = self._cap
+        # Aquí corre la captura en tiempo real
         
         #Crear una carpeta para las nuevas imágenes si no existe aún
         try:
@@ -124,31 +111,24 @@ class Camara(BoxLayout):
         img = cv2.flip(img, 0)
         texture1 = Texture.create(size=(img.shape[1], img.shape[0]), colorfmt='bgr')
         texture1.blit_buffer(img.tobytes(), colorfmt='bgr', bufferfmt='ubyte')
-        # texture1.blit_buffer(img.tostring(), colorfmt='bgr', bufferfmt='ubyte')
+
         self.camera_display.texture = texture1
 
+        ## El frame se va tomando a la par de la imagen vista en vivo en la cámara
         frame_actual = dt
-
         
-        ## Condición para tomar capturas mientras la cámara está abierta
-        # while(True):
-        print("entró"+ str(frame_actual))
-        
-        ## Se usa el tiempo para tomar una captura del video cada cierto tiempo
-        #start_time = time.time()
-
         ## Leer el frame 
         ret,frame = self._cap.read()
         
         nombre = 'Images/RTImages/frame' + str(frame_actual) + '.jpg'
         print ('Creando...' + nombre)
 
+        ## Voltea la imagen para "escribirla" / guardarla correctamente 
+        img = cv2.flip(img, 0)
         ## Escribe en la carpeta las nuevas imágenes
         cv2.imwrite(nombre, img)
         print ('Guardando...' + nombre)
-        #spent = time.time() - start_time # tiempo que se uso en las tareas de arriba
-
-        #time.sleep(5 - spent)
+        
         frame_actual += 1;
 
 
