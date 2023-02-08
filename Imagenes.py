@@ -1,6 +1,9 @@
 #Imagen y prepocesamiento
-
-# Librerias
+#Librerías principales
+import sys
+import os
+from os import scandir, getcwd
+# Librerias preprocesamiento
 import cv2 as cv
 import numpy as np
 from skimage import io
@@ -26,7 +29,12 @@ class Imagen(object):
     # Pre-procesamiento de imagen
     def preprocesamiento(self):
         #Adquisición de imagen
-        imagen = cv.imread("Images/"+self.nombre+"."+self.formato)    
+
+        #Imágenes para obtener distancias
+        # imagen = cv.imread("Images/"+self.nombre+"."+self.formato)    
+
+        #Imágenes en tiempo real
+        imagen = cv.imread("Images/RTImages/"+self.nombre+"."+self.formato)    
 
         # Eliminación de ruido - Preprocesamiento (2)
         im_ruido = cv.pyrMeanShiftFiltering(imagen,sp=30,sr=50)
@@ -72,6 +80,16 @@ class Imagen(object):
         #momentos(im_binaria2)
         #distance(im_binaria2)
 
+        #Crear una carpeta para las nuevas imágenes si no existe aún
+        try:
+            # Se crea la carpeta
+            if not os.path.exists('Images/NewImages'):
+                os.makedirs('Images/NewImages')
+        
+        # Si no se puede crear, muestra un error
+        except OSError:
+            print ('Error: No se ha podido crear la carpeta nueva :(')
+
         Nueva = cv.imwrite("Images/NewImages/"+self.nombre+"."+self.formato,im_binaria2)
 
         # Etiquetado - Técnicas y funciones de python (13)
@@ -84,7 +102,7 @@ class Imagen(object):
         superficie_desconocida = cv.subtract(dilatacion, superficie_8)      #dilatacion   
         # Etiquetado
         ret, etiquetado = cv.connectedComponents(superficie_8)  
-        print("Total de regiones:",ret)
+        #print("Total de regiones:",ret)
         
         # Agregamos 1 
         etiquetado = etiquetado + 1

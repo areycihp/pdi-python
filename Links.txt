@@ -67,3 +67,8 @@ https://docs.opencv.org/2.4/modules/highgui/doc/reading_and_writing_images_and_v
 
 Texture:
 https://kivy.org/doc/stable/api-kivy.graphics.texture.html
+
+
+Python:
+https://www.w3schools.com/python/default.asp
+https://www.geeksforgeeks.org/

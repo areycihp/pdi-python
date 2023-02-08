@@ -1,6 +1,9 @@
-##Abrir pantalla de cámara
-##Librerías para GUI
+#Abrir pantalla de cámara
+#Librerías principales
 import sys
+import os
+from os import scandir, getcwd
+#Librerías para GUI
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
@@ -10,13 +13,15 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.config import Config
 from subprocess import Popen, PIPE
 from kivy.clock import Clock
-##Librería cámara
+#Librería cámara
 import cv2
-import os
 import time
 import numpy as np
+#Preprocesamiento de imágenes
+from Imagenes import Imagen
 
 Config.set('graphics', 'resizable', True)
+letraFinal = ""
 
 #----------- Elementos de cámara -----------
 
@@ -32,6 +37,7 @@ GridLayout:
 <Camara>:
     camera_display: img
     camera_button: btn
+    camera_lbl: btn_label
     orientation: 'vertical'
     Image:
         id: img
@@ -46,6 +52,9 @@ GridLayout:
             text: "Iniciar"
             on_press: root.init_camera()
         Button:
+            id: btn_label
+            text: ""
+        Button:
             text: 'Salir'
             on_release: app.stop()
 '''
@@ -54,6 +63,7 @@ GridLayout:
 class Camara(BoxLayout):
     camera_display = ObjectProperty()
     camera_button: ObjectProperty()
+    camera_lbl: ObjectProperty()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -61,13 +71,22 @@ class Camara(BoxLayout):
     
     def on_stop(self):
         #without this, app will not exit even if the window is closed
-        self._cap.release()
+        #self._cap.release()
+        ruta = 'Images/RTImages/'
+        for real in lsReal():
+            try:
+                os.remove(ruta)
+                print('Elementos eliminados exitosamente')
+            except OSError as error:
+                print(error)
+                print("Eliminado incorrecto")
+
 
     def init_camera(self): 
         self.camera_button.disabled = True
         if not self.camera_display.texture:
             self.camera_button.text = "Iniciando cámara"
-            print("cero if")
+            
             if self._cap is None:
                 
                 self._cap = cv2.VideoCapture(captura)
@@ -114,23 +133,81 @@ class Camara(BoxLayout):
 
         self.camera_display.texture = texture1
 
-        ## El frame se va tomando a la par de la imagen vista en vivo en la cámara
+        # El frame se va tomando a la par de la imagen vista en vivo en la cámara
         frame_actual = dt
         
-        ## Leer el frame 
+        # Leer el frame 
         ret,frame = self._cap.read()
         
         nombre = 'Images/RTImages/frame' + str(frame_actual) + '.jpg'
         print ('Creando...' + nombre)
 
-        ## Voltea la imagen para "escribirla" / guardarla correctamente 
+        # Voltea la imagen para "escribirla" / guardarla correctamente 
         img = cv2.flip(img, 0)
-        ## Escribe en la carpeta las nuevas imágenes
+        # Escribe en la carpeta las nuevas imágenes
         cv2.imwrite(nombre, img)
         print ('Guardando...' + nombre)
         
+
+        # Llamar preprocesamiento
+
+        nombreRT = 'frame' + str(frame_actual)
+        ImagenReal = Imagen(nombreRT,'jpg')
+        #Se realiza el preprocesamiento y se guarda como nueva imagen para utilizarse en la función de distancia
+        imagen1 = ImagenReal.preprocesamiento()
+        
+        calculoDistancia(nombreRT)
+
+        # Escribe letra en pantalla
+        self.camera_lbl.text = "LETRA: \n" + calculoDistancia(nombreRT) #letraFinal
+
         frame_actual += 1;
 
+
+
+#Se leen las nuevas imágenes para calcular la distancia a partir de los momentos de Hu
+def calculoDistancia(imagenReal):
+    m2 = 0
+    m3 = 0
+    letraF = ""
+
+    imReal = cv2.imread("Images/NewImages/"+imagenReal+".jpg",cv2.IMREAD_GRAYSCALE)
+    #print("Imagen: "+ imagenReal + "\n")
+    for pre in ls():
+        x = pre.split(".")
+        # for real in lsReal():
+             
+        #Imágenes Yara
+        if len(x[0]) == 2:
+            ImagenYara = str(x[0]) + ".jpg"
+            im3 = cv2.imread("Images/PreImages/"+ImagenYara,cv2.IMREAD_GRAYSCALE)
+            m3 = cv2.matchShapes(imReal,im3,cv2.CONTOURS_MATCH_I2,0)
+            print(ImagenYara + ": {}".format(m3))
+        #Imágenes Are
+        else:
+            ImagenAre = str(x[0]) + ".jpg"
+            im2 = cv2.imread("Images/PreImages/"+ImagenAre,cv2.IMREAD_GRAYSCALE)
+            m2 = cv2.matchShapes(imReal,im2,cv2.CONTOURS_MATCH_I2,0)
+            print(ImagenAre + ": {}".format(m2))
+
+        # Condición para encontrar relación con la letra definida, entre menor sea la distancia, más se parece la letra
+        if (m2<= 0.007 and m3<= 0.01):
+            if len(x[0]) == 2:
+                y = pre.split('y')
+                letraF = str(y[0])
+            else:
+                letraF = str(x[0])
+        print(letraF)
+    return letraF
+        
+
+#Listar archivos de la carpeta de imágenes preprocesadas
+def ls(ruta = 'Images/PreImages/'):
+    return [arch.name for arch in scandir(ruta) if arch.is_file()]
+
+#Listar archivos de la carpeta de frames de cámara en tiempo real
+def lsReal(ruta = 'Images/NewImages/'):
+    return [arch.name for arch in scandir(ruta) if arch.is_file()]
 
 #Para ejecutar la ventana
 class OCVCamara(App):
