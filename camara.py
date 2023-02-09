@@ -5,6 +5,7 @@ import os
 from os import scandir, getcwd
 #Librerías para GUI
 from kivy.app import App
+from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ObjectProperty
@@ -59,6 +60,8 @@ GridLayout:
             on_release: app.stop()
 '''
 
+
+# app.stop()
 #Clase que manipula o trabaja los elementos en la ventana
 class Camara(BoxLayout):
     camera_display = ObjectProperty()
@@ -68,19 +71,6 @@ class Camara(BoxLayout):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._cap = None
-    
-    def on_stop(self):
-        #without this, app will not exit even if the window is closed
-        #self._cap.release()
-        ruta = 'Images/RTImages/'
-        for real in lsReal():
-            try:
-                os.remove(ruta)
-                print('Elementos eliminados exitosamente')
-            except OSError as error:
-                print(error)
-                print("Eliminado incorrecto")
-
 
     def init_camera(self): 
         self.camera_button.disabled = True
@@ -111,6 +101,29 @@ class Camara(BoxLayout):
     def _btn_restart(self, *args):
         self.camera_button.text = "Iniciar"
         self.camera_button.disabled = False
+        #Para cerrar completamente la aplicación
+        self._cap.release()
+        #Window.close()
+        
+        ruta = 'Images/NewImages/'
+        for real in lsReal():
+            try:
+                os.remove(ruta + real)
+                print('Elementos eliminados exitosamente')
+            except OSError as error:
+                print(error)
+                print("Eliminado incorrecto")
+
+
+        ruta2 = 'Images/RTImages/'
+        for new in lsRealFrames():
+            try:
+                os.remove(ruta2 + new)
+                print('Elementos eliminados exitosamente')
+            except OSError as error:
+                print(error)
+                print("Eliminado incorrecto")
+
 
     def update(self, dt):
         # Aquí corre la captura en tiempo real
@@ -191,7 +204,7 @@ def calculoDistancia(imagenReal):
             print(ImagenAre + ": {}".format(m2))
 
         # Condición para encontrar relación con la letra definida, entre menor sea la distancia, más se parece la letra
-        if (m2<= 0.007 and m3<= 0.01):
+        if (m2<= 0.005 and m3<= 0.01):
             if len(x[0]) == 2:
                 y = pre.split('y')
                 letraF = str(y[0])
@@ -205,8 +218,13 @@ def calculoDistancia(imagenReal):
 def ls(ruta = 'Images/PreImages/'):
     return [arch.name for arch in scandir(ruta) if arch.is_file()]
 
-#Listar archivos de la carpeta de frames de cámara en tiempo real
+#Listar archivos de la carpeta de frames de cámara en tiempo real preprocesadas
 def lsReal(ruta = 'Images/NewImages/'):
+    return [arch.name for arch in scandir(ruta) if arch.is_file()]
+
+
+#Listar archivos de la carpeta de frames de cámara en tiempo real
+def lsRealFrames(ruta = 'Images/RTImages/'):
     return [arch.name for arch in scandir(ruta) if arch.is_file()]
 
 #Para ejecutar la ventana

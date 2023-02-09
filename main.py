@@ -75,46 +75,6 @@ GridLayout:
 
 
 
-#----------- Elementos de cámara -----------
-
-#Definición de elementos en la ventana
-layout_camara = '''
-GridLayout:
-    cols: 1
-    size_hint: 0.6,0.7
-      
-<Camara>:
-    camera_display: img
-    camera_button: btn
-    camera_lbl: btn_label
-    orientation: 'vertical'
-    Image:
-        id: img
-        opacity: 1 if self.texture else 0
-        size_hint: 1, 0.7
-
-    BoxLayout:
-        orientation: 'horizontal'
-        size_hint: 1.0, 0.1
-        Button:
-            id: btn
-            text: "Iniciar"
-            on_press: root.init_camera()
-        Button:
-            id: btn_label
-            text: ""
-        Button:
-            text: 'Salir'
-            on_release: app.stop()
-'''
-
-
-
-
-
-
-
-
 #Se leen las nuevas imágenes para calcular la distancia a partir de los momentos de Hu
 def calculoDistancia(imagenReal):
     m2 = 0
@@ -158,6 +118,40 @@ def ls(ruta = 'Images/PreImages/'):
 #Listar archivos de la carpeta de frames de cámara en tiempo real
 def lsReal(ruta = 'Images/NewImages/'):
     return [arch.name for arch in scandir(ruta) if arch.is_file()]
+
+
+#----------- Elementos de cámara -----------
+
+#Definición de elementos en la ventana
+layout_camara = '''
+GridLayout:
+    cols: 1
+    size_hint: 0.6,0.7
+      
+<Camara>:
+    camera_display: img
+    camera_button: btn
+    camera_lbl: btn_label
+    orientation: 'vertical'
+    Image:
+        id: img
+        opacity: 1 if self.texture else 0
+        size_hint: 1, 0.7
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: 1.0, 0.1
+        Button:
+            id: btn
+            text: "Iniciar"
+            on_press: root.init_camera()
+        Button:
+            id: btn_label
+            text: ""
+        Button:
+            text: 'Salir'
+            on_release: app.stop()
+'''
 
 
 #Clase que manipula o trabaja los elementos en la ventana secundaria
@@ -273,13 +267,12 @@ class OCVCamara(App):
         return Camara()
 
 
-
-
 #Clase que manipula o trabaja los elementos en la ventana principal
 class Principal(BoxLayout):
     logo_principal = ObjectProperty()
     etiqueta_principal = ObjectProperty()
     boton_principal = ObjectProperty()
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._cap = None
