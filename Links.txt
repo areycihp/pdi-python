@@ -68,6 +68,8 @@ https://docs.opencv.org/2.4/modules/highgui/doc/reading_and_writing_images_and_v
 Texture:
 https://kivy.org/doc/stable/api-kivy.graphics.texture.html
 
+Listar archivos de un directorio:
+https://es.stackoverflow.com/questions/24278/c%C3%B3mo-listar-todos-los-archivos-de-una-carpeta-usando-python
 
 Python:
 https://www.w3schools.com/python/default.asp

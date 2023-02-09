@@ -58,7 +58,8 @@ GridLayout:
 class Principal(BoxLayout):
     logo_principal = ObjectProperty()
     etiqueta_principal = ObjectProperty()
-    boton_principal = ObjectProperty(None)
+    boton_principal = ObjectProperty()
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._cap = None
