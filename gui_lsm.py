@@ -32,6 +32,11 @@ GridLayout:
     boton_principal: btn_comenzar
     orientation: 'vertical'
     spacing: 10
+    Label:
+        id: lbl1
+        text: 'Reconocimiento de LSM'
+        font_size: 28        
+        color: 0,1,0,1
     Image:
         id: img_logo
         source: 'Images/logo.jpg'
@@ -40,7 +45,7 @@ GridLayout:
     Label:
         id: lbl
         text: 'Bienvenido'
-        font_size: 26 
+        font_size: 26     
     BoxLayout:
         orientation: 'horizontal'
         size_hint: 1, 0.5
