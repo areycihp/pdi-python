@@ -1,8 +1,7 @@
 -------------------------- Programas que se quedan para versión final ----------------------------------------
 
-1. gui_lsm.py -> Página o ventana del menú principal (con logo y nombre del proyecto)
-2. camara.py -> Ventana de la cámara donde se realiza el procesamiento y comparación de imágenes para determinar la seña correspondiente
-3. Imagenes.py -> Clase encargada del preprocesamiento de las imágenes
+1. main.py -> Contenido total (interfaz, cámara y preprocesamiento)
+2. nueva_ventana.kv -> Construcción de ventanas principal y cámara
 
 -------------------------- Carpetas que se quedan para versión final ----------------------------------------
 1. Images -> Carpeta principal de Imágenes

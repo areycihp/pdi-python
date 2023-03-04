@@ -27,6 +27,48 @@ https://stackoverflow.com/questions/59800318/how-to-install-torch-in-python
 pip install pyodbc
 
 
+----------------- INSTALACIÓN EN LINUX -----------------------------
+sudo apt-get install python3-pip
+sudo pip3 install --upgrade pip
+pip3 install scikit-build
+pip3 install opencv-python
+
+sudo apt-get update -y 
+
+pip install --upgrade scikit-image
+
+sudo add-apt-repository ppa:kivy-team/kivy
+sudo apt-get install python3-kivy
+sudo apt-get install libsdl2-2.0-0 libsdl2-image-2.0-0 libsdl2-mixer-2.0-0 libsdl2-ttf-2.0-0
+
+
+sudo apt install python-pip
+sudo apt install python3-numpy
+** sudo apt-get install python3-opencv
+sudo apt-get install -y python3-skimage
+
+---------git--------
+sudo apt install git
+
+--------buildozer---
+git clone https://github.com/kivy/buildozer.git
+cd buildozer
+sudo python3 setup.py install
+
+--------dependencias-----
+sudo apt update
+sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+pip3 install --user --upgrade Cython==0.29.33 virtualenv  # the --user should be removed if you do this in a venv
+
+
+cd /bin/ && sudo gedit cython
+cython3 $@
+sudo chmod 755 cython
+sudo apt get install cython3
+
+sudo apt install libssl-dev
+p4a clean builds
+
 
 
 

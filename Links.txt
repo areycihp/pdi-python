@@ -1,0 +1,80 @@
+https://datasmarts.net/es/como-dilatar-y-erosionar-imagenes-en-scikit-image/
+http://www.laurence.com.ar/artes/comun/Apuntes%20procesamiento%20digital%20de%20imagenes.pdf#:~:text=Utilizan%20operaciones%20como%20el%20preprocesamiento%20de%20imagenpara%20reducir,y%20sus%20salidas%20tambi%C3%A9n.%20Procesos%20de%20Nivel%20Medio%3A
+
+funciones dilatación:
+https://www.codetd.com/es/article/12186288
+https://www.coseries.com/morphological-transformations-in-python-using-opencv/
+
+Filtros:
+http://www4.ujaen.es/~satorres/practicas/practica3_vc.pdf#:~:text=La%20mayor%C3%ADa%20de%20las%20t%C3%A9cnicas%20para%20detectar%20bordes,1.1.%20Operadores%20basadas%20en%20la%20primera%20derivada%20%28Gradiente%29.
+https://1library.co/article/funci%C3%B3n-bordes-sobel-filtros-im%C3%A1genes-digitales.6zkxg8my#:~:text=3.4.6%20Funci%C3%B3n%20bordes%20de%20Sobel.%20Esta%20funci%C3%B3n%20es,del%20gradiente%20y%20la%20direcci%C3%B3n%20del%20vector%20gradiente.
+http://www.bibliotecacpa.org.ar/greenstone/collect/salagr/index/assoc/HASH018a/73337b8c.dir/doc.pdf
+https://es.slideshare.net/omarspp/segmentacin-de-imagen
+https://www.boletin.upiita.ipn.mx/index.php/ciencia/669-cyt-numero-55/1293-extraccion-de-bordes-operadores-sobel-prewitt-y-roberts
+
+Momentos de Hu:
+https://learnopencv.com/shape-matching-using-hu-moments-c-python/
+https://programmerclick.com/article/4503787427/
+
+Descriptores de imágenes:
+https://docs.python.org/es/dev/howto/descriptor.html#descriptor-howto-guide
+
+Kivy:
+https://kivy.org/
+https://mireal.me/tutorial-de-kivy-python-crea-aplicaciones-moviles-en-python/
+
+
+MediaPipe:
+http://omes-va.com/mediapipe-hands-python/
+
+OpenCV realtime:
+https://towardsdatascience.com/implementing-real-time-object-detection-system-using-pytorch-and-opencv-70bac41148f7
+
+Lectura de imagen en tiempo real:
+https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_gui/py_video_display/py_video_display.html
+https://www.geeksforgeeks.org/extract-images-from-video-in-python/
+https://stackoverflow.com/questions/58851000/capture-image-from-video-every-5-seconds-and-save-picutres-using-python-openc
+https://www.geeksforgeeks.org/extract-images-from-video-in-python/
+
+Kivy Camara:
+https://kivy.org/doc/stable/api-kivy.uix.camera.html
+
+Haar cascades:**
+https://github.com/opencv/opencv/tree/master/data/haarcascades
+https://docs.opencv.org/4.3.0/dc/d88/tutorial_traincascade.html
+
+
+Connect to access database:
+https://pythoninoffice.com/python-ms-access-database-pyodbc/
+https://stackoverflow.com/questions/57635782/how-to-connect-python-to-microsoft-access-database-file
+
+Capturar video:
+https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_gui/py_video_display/py_video_display.html
+
+
+Gui,
+Boxlayout:
+https://barcelonageeks.com/python-agregar-una-imagen-en-kivy-usando-un-archivo-kv/#:~:text=Para%20usar%20el%20widget%20de%20imagen%2C%20debe%20importar%3A,tiene%20toda%20la%20funcionalidad%20relacionada%20con%20las%20im%C3%A1genes.
+https://kivy.org/doc/stable/api-kivy.uix.boxlayout.html
+https://stackoverflow.com/questions/54551968/python-kivy-camera-and-changing-screen
+
+Abrir ventana nueva con botón:}
+https://stackoverflow.com/questions/56609278/how-to-open-new-window-on-button-press-event-in-kivy	
+https://docs.python.org/2/library/subprocess.html#popen-objects
+
+OpenCV:
+https://docs.opencv.org/2.4/modules/highgui/doc/reading_and_writing_images_and_video.html
+
+Texture:
+https://kivy.org/doc/stable/api-kivy.graphics.texture.html
+
+Listar archivos de un directorio:
+https://es.stackoverflow.com/questions/24278/c%C3%B3mo-listar-todos-los-archivos-de-una-carpeta-usando-python
+
+Python:
+https://www.w3schools.com/python/default.asp
+https://www.geeksforgeeks.org/
+
+Cámara (Android):
+https://stackoverflow.com/questions/61362254/android-opencv-camera-example-is-just-showing-black-screen
+https://stackoverflow.com/questions/61122285/kivy-camera-application-with-opencv-in-android-shows-black-screen
