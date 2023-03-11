@@ -21,7 +21,7 @@ import numpy as np
 
 #Permisos android
 from android.permissions import request_permissions, Permission
-request_permissions([Permission.CAMERA,Permission.WRITE_EXTERNAL_STORAGE,Permission.READ_EXTERNAL_STORAGE])
+
 
 #Cambiar ek código en archivo buildozer.spec
 #android.permissions = CAMERA, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
@@ -165,6 +165,7 @@ class Camara(Screen):
         self._cap = None
 
     def init_camera(self): 
+        request_permissions([Permission.CAMERA,Permission.WRITE_EXTERNAL_STORAGE,Permission.READ_EXTERNAL_STORAGE])
         self.camera_button.disabled = True
         if not self.camera_display.texture:
             self.camera_button.text = "Iniciando cámara"
