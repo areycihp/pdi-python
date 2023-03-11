@@ -1,0 +1,59 @@
+Manager:
+    Principal:
+    Camara:
+
+
+<Principal>
+    name: "principal"
+    logo_principal: img_logo
+    etiqueta_principal: lbl
+    boton_principal: btn_comenzar
+    orientation: 'vertical'
+    spacing: 5
+    Label:
+        id: lbl
+        text: 'Reconocimiento LSM'
+        size_hint: 1.5, 1
+        font_size: 20    
+    Image:
+        id: img_logo
+        source: 'Images/logo.jpg'
+        opacity: 1 if self.texture else 0
+        size_hint: 0.5, 1
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: 1, 0.1
+        Button:
+            id: btn_comenzar
+            text: "Comenzar"
+            on_release: app.root.current = "camara"
+        Button:
+            id: btn_salir
+            text: 'Salir'
+            on_release: app.stop()
+
+
+
+<Camara>:
+    name: "camara"
+    camera_display: img
+    camera_button: btn
+    camera_lbl: btn_label
+    orientation: 'vertical'
+    Image:
+        id: img
+        opacity: 1 if self.texture else 0
+        size_hint: 1, 1
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: 1.0, 0.1
+        Button:
+            id: btn
+            text: "Iniciar"
+            on_press: root.init_camera()
+        Button:
+            id: btn_label
+            text: ""
+        Button:
+            text: 'Regresar'
+            on_release: app.root.current = "principal"

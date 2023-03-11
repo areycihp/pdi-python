@@ -1,0 +1,11 @@
+-------------------------- Programas que se quedan para versión final ----------------------------------------
+
+1. main.py -> Contenido total (interfaz, cámara y preprocesamiento)
+2. nueva_ventana.kv -> Construcción de ventanas principal y cámara
+
+-------------------------- Carpetas que se quedan para versión final ----------------------------------------
+1. Images -> Carpeta principal de Imágenes
+	1.1. PreImages -> Carpeta con las imágenes preprocesadas de las señas 
+	1.2. RTImages -> Carpeta con las imágenes o frames que se van obteniendo en tiempo real (se eliminan al detener la cámara)
+	1.3. NewImages -> Carpetea con los frames de tiempo real preprocesados
+	1.4. Logo -> Logo en menú de ventana principal 
