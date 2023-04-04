@@ -1,5 +1,6 @@
 # Abrir pantalla de cámara
 # Librerías principales
+import math
 import sys
 import os
 from os import scandir, getcwd
@@ -27,7 +28,7 @@ letraFinal = ""
 # ----------- Elementos de cámara -----------
 
 # Id de cámara a abrirse, al ser 0, se toma la cámara principal
-captura = 1
+captura = 0
 
 # Definición de elementos en la ventana
 layout_camara = '''
@@ -173,7 +174,7 @@ class Camara(BoxLayout):
         self.camera_lbl.text = "LETRA: \n" + \
             calculoDistancia(nombreRT)  # letraFinal
 
-        frame_actual += 1
+        #frame_actual += 1
 
 
 # Se leen las nuevas imágenes para calcular la distancia a partir de los momentos de Hu
@@ -203,7 +204,7 @@ def calculoDistancia(imagenReal):
             cnt2 = contours2[0]
 
             m3 = cv2.matchShapes(cnt1, cnt2, cv2.CONTOURS_MATCH_I2, 0)
-            m3 = round(m3, 3)
+            
             #print(ImagenYara + ": {}".format(m3))
             print(imagenReal)
         # Imágenes Are
@@ -221,29 +222,27 @@ def calculoDistancia(imagenReal):
             cnt2 = contours2[0]
 
             m2 = cv2.matchShapes(cnt1, cnt2, cv2.CONTOURS_MATCH_I2, 0)
-            m2 = round(m2, 3)
+            
             #print(ImagenAre + ": {}".format(m2))
             print(imagenReal)
 
-        # Condición para encontrar relación con la letra definida, entre menor sea la distancia, más se parece la letra
-        # m2 <= 0.05 and  m3 <= 0.05
+        # Condición para encontrar relación con la letra definida, el umbral establecido es menor a 0.9 y, obviamente, cercano a cero para mayor coincidencia
         prom = (m2+m3)/2
-        print("Prom" + ": {}".format(m2))
-        if (prom > 0.90):  # m2+m3 < 0.045
-            print("No coincide")
-            letraF = "Sin coincidencia"
-        else:
+        umbral = 0.9
+        
+        if (math.isclose(prom,umbral) or prom < umbral):  #Función recomendada por mayor alernativa (mejor resultado para flotates)
+            print(prom)
             if len(x[0]) == 2:
                 y = pre.split('y')
                 letraF = str(y[0])
             else:
                 letraF = str(x[0])
             print("Letra:" + letraF)
-            
-            
-        # break
-        # else:
-        #     break
+            break;
+
+        else:
+            print("No coincide :(")
+            #letraF = "Sin coincidencia"
 
     return letraF
 
@@ -264,8 +263,6 @@ def lsRealFrames(ruta='Images/RTImages/'):
     return [arch.name for arch in scandir(ruta) if arch.is_file()]
 
 # Para ejecutar la ventana
-
-
 class OCVCamara(App):
     def build(self):
         Builder.load_string(layout_camara)
