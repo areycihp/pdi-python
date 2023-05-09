@@ -239,7 +239,7 @@ def calculoDistancia(imagenReal):
                 print(ImagenAre + ": {}".format(m2))
         
         
-        if (bandera1 is True and bandera2 is True):  
+        if (bandera1 is True or bandera2 is True):  
             if len(x[0]) == 2:
                 y = pre.split('y')
                 letraF = str(y[0])
