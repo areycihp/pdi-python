@@ -182,16 +182,20 @@ def calculoDistancia(imagenReal):
     m2 = 0
     m3 = 0
     letraF = ""
+    umbral = 0.9
+    bandera1 = False
+    bandera2 = False
 
     imReal = cv2.imread("Images/NewImages/"+imagenReal +
                         ".jpg", cv2.IMREAD_GRAYSCALE)
-    # print("Imagen: "+ imagenReal + "\n")
+    
     for pre in ls():
+        ##Para comparación por letra (imagen de cada miembro del equipo)
         x = pre.split(".")
 
         # Imágenes Yara
         if len(x[0]) == 2:
-            ImagenYara = str(x[0]) + ".jpg"
+            ImagenYara = pre
             im3 = cv2.imread("Images/PreImages/"+ImagenYara,
                              cv2.IMREAD_UNCHANGED)
             ret, thresh = cv2.threshold(im3, 127, 255, 0)
@@ -205,11 +209,15 @@ def calculoDistancia(imagenReal):
 
             m3 = cv2.matchShapes(cnt1, cnt2, cv2.CONTOURS_MATCH_I2, 0)
             
-            #print(ImagenYara + ": {}".format(m3))
-            print(imagenReal)
+            
+            print("------------------")
+            if (math.isclose(m3,umbral) or m3 < umbral): #Función recomendada por mayor alernativa (mejor resultado para flotates)
+                bandera1 = True
+                print(ImagenYara + ": {}".format(m3))
         # Imágenes Are
         else:
-            ImagenAre = str(x[0]) + ".jpg"
+            print(len(x[0]))
+            ImagenAre = pre
             im2 = cv2.imread("Images/PreImages/"+ImagenAre,
                              cv2.IMREAD_UNCHANGED)
             ret, thresh = cv2.threshold(im2, 127, 255, 0)
@@ -223,15 +231,15 @@ def calculoDistancia(imagenReal):
 
             m2 = cv2.matchShapes(cnt1, cnt2, cv2.CONTOURS_MATCH_I2, 0)
             
-            #print(ImagenAre + ": {}".format(m2))
-            print(imagenReal)
-
-        # Condición para encontrar relación con la letra definida, el umbral establecido es menor a 0.9 y, obviamente, cercano a cero para mayor coincidencia
-        prom = (m2+m3)/2
-        umbral = 0.9
+            
+            print("****************")
+            # Condición para encontrar relación con la letra definida, el umbral establecido es menor a 0.9 y, obviamente, cercano a cero para mayor coincidencia
+            if (math.isclose(m2,umbral) or m2 < umbral): #Función recomendada por mayor alernativa (mejor resultado para flotates)
+                bandera2 = True
+                print(ImagenAre + ": {}".format(m2))
         
-        if (math.isclose(prom,umbral) or prom < umbral):  #Función recomendada por mayor alernativa (mejor resultado para flotates)
-            print(prom)
+        
+        if (bandera1 is True and bandera2 is True):  
             if len(x[0]) == 2:
                 y = pre.split('y')
                 letraF = str(y[0])
@@ -239,7 +247,6 @@ def calculoDistancia(imagenReal):
                 letraF = str(x[0])
             print("Letra:" + letraF)
             break;
-
         else:
             print("No coincide :(")
             #letraF = "Sin coincidencia"
