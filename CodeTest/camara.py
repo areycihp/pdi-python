@@ -192,6 +192,7 @@ def calculoDistancia(imagenReal):
     for pre in ls():
         ##Para comparación por letra (imagen de cada miembro del equipo)
         x = pre.split(".")
+        
 
         # Imágenes Yara
         if len(x[0]) == 2:
@@ -210,13 +211,12 @@ def calculoDistancia(imagenReal):
             m3 = cv2.matchShapes(cnt1, cnt2, cv2.CONTOURS_MATCH_I2, 0)
             
             
-            print("------------------")
-            if (math.isclose(m3,umbral) or m3 < umbral): #Función recomendada por mayor alernativa (mejor resultado para flotates)
-                bandera1 = True
-                print(ImagenYara + ": {}".format(m3))
+            # print("------------------")
+            # if (math.isclose(m3,umbral) or m3 < umbral): #Función recomendada por mayor alernativa (mejor resultado para flotates)
+            #     bandera1 = True
+            #     print(ImagenYara + ": {}".format(m3))
         # Imágenes Are
         else:
-            print(len(x[0]))
             ImagenAre = pre
             im2 = cv2.imread("Images/PreImages/"+ImagenAre,
                              cv2.IMREAD_UNCHANGED)
@@ -231,25 +231,21 @@ def calculoDistancia(imagenReal):
 
             m2 = cv2.matchShapes(cnt1, cnt2, cv2.CONTOURS_MATCH_I2, 0)
             
-            
-            print("****************")
-            # Condición para encontrar relación con la letra definida, el umbral establecido es menor a 0.9 y, obviamente, cercano a cero para mayor coincidencia
-            if (math.isclose(m2,umbral) or m2 < umbral): #Función recomendada por mayor alernativa (mejor resultado para flotates)
-                bandera2 = True
-                print(ImagenAre + ": {}".format(m2))
         
+        # Condición para encontrar relación con la letra definida, el umbral establecido es menor a 0.9 y, obviamente, cercano a cero para mayor coincidencia
+        prom = (m2+m3)/2
+        print("Prom" + ": {}".format(m2))
         
-        if (bandera1 is True or bandera2 is True):  
+        umbral = 0.9
+
+        if (math.isclose(prom,umbral) or prom < umbral):  #Función recomendada por mayor alernativa (mejor resultado para flotates)
+            print(prom)
             if len(x[0]) == 2:
                 y = pre.split('y')
                 letraF = str(y[0])
             else:
                 letraF = str(x[0])
-            print("Letra:" + letraF)
-            break;
-        else:
-            print("No coincide :(")
-            #letraF = "Sin coincidencia"
+            print("Letra:" + letraF)    
 
     return letraF
 
