@@ -78,3 +78,10 @@ https://www.geeksforgeeks.org/
 Cámara (Android):
 https://stackoverflow.com/questions/61362254/android-opencv-camera-example-is-just-showing-black-screen
 https://stackoverflow.com/questions/61122285/kivy-camera-application-with-opencv-in-android-shows-black-screen
+
+Floodfill:
+https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/
+https://stackoverflow.com/questions/47517667/how-does-cv2-floodfill-work
+
+ConnectedComponents:
+https://www.geeksforgeeks.org/python-opencv-connected-component-labeling-and-analysis/
