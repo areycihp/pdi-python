@@ -62,7 +62,6 @@ GridLayout:
 '''
 
 
-# app.stop()
 # Clase que manipula o trabaja los elementos en la ventana
 class Camara(BoxLayout):
     camera_display = ObjectProperty()
@@ -149,9 +148,6 @@ class Camara(BoxLayout):
         # El frame se va tomando a la par de la imagen vista en vivo en la cámara
         frame_actual = dt
 
-        # Leer el frame
-        # ret, frame = self._cap.read()
-
         nombre = 'Images/RTImages/frame' + str(frame_actual) + '.jpg'
         # print ('Creando...' + nombre)
 
@@ -174,82 +170,42 @@ class Camara(BoxLayout):
         self.camera_lbl.text = "LETRA: \n" + \
             calculoDistancia(nombreRT)  # letraFinal
 
-        #frame_actual += 1
-
 
 # Se leen las nuevas imágenes para calcular la distancia a partir de los momentos de Hu
 def calculoDistancia(imagenReal):
-    m2 = 0
-    m3 = 0
+    m1 = 0
     letraF = ""
     umbral = 0.9
-    bandera1 = False
-    bandera2 = False
+    umbral2 = 0.05
 
+    # Frame en "tiempo real", ya preprocesada
     imReal = cv2.imread("Images/NewImages/"+imagenReal +
-                        ".jpg", cv2.IMREAD_GRAYSCALE)
-    
+                        ".jpg", cv2.IMREAD_UNCHANGED)
+
+    # Para cada imagen de la base de conocimientos (ya preprocesada)
     for pre in ls():
-        ##Para comparación por letra (imagen de cada miembro del equipo)
-        x = pre.split(".")
+        # Para comparación por letra (5 imágenes)
+        x = pre.split("_")
+        letra = x[0]
+        numero = x[1]
 
-        # Imágenes Yara
-        if len(x[0]) == 2:
-            ImagenYara = pre
-            im3 = cv2.imread("Images/PreImages/"+ImagenYara,
+        # Compara con el conjunto de imágenes 
+        im1 = cv2.imread("Images/PreImages/" + pre,
                              cv2.IMREAD_UNCHANGED)
-            ret, thresh = cv2.threshold(im3, 127, 255, 0)
-            ret, thresh2 = cv2.threshold(imReal, 127, 255, 0)
-            contours, hierarchy = cv2.findContours(
-                thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-            cnt1 = contours[0]
-            contours2, hierarchy = cv2.findContours(
-                thresh2, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-            cnt2 = contours2[0]
+        m1 = cv2.matchShapes(imReal, im1, cv2.CONTOURS_MATCH_I2, 0)
 
-            m3 = cv2.matchShapes(cnt1, cnt2, cv2.CONTOURS_MATCH_I2, 0)
-            
-            
-            print("------------------")
-            if (math.isclose(m3,umbral) or m3 < umbral): #Función recomendada por mayor alernativa (mejor resultado para flotates)
-                bandera1 = True
-                print(ImagenYara + ": {}".format(m3))
-        # Imágenes Are
-        else:
-            print(len(x[0]))
-            ImagenAre = pre
-            im2 = cv2.imread("Images/PreImages/"+ImagenAre,
-                             cv2.IMREAD_UNCHANGED)
-            ret, thresh = cv2.threshold(im2, 127, 255, 0)
-            ret, thresh2 = cv2.threshold(imReal, 127, 255, 0)
-            contours, hierarchy = cv2.findContours(
-                thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-            cnt1 = contours[0]
-            contours2, hierarchy = cv2.findContours(
-                thresh2, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-            cnt2 = contours2[0]
 
-            m2 = cv2.matchShapes(cnt1, cnt2, cv2.CONTOURS_MATCH_I2, 0)
-            
-            
-            print("****************")
-            # Condición para encontrar relación con la letra definida, el umbral establecido es menor a 0.9 y, obviamente, cercano a cero para mayor coincidencia
-            if (math.isclose(m2,umbral) or m2 < umbral): #Función recomendada por mayor alernativa (mejor resultado para flotates)
-                bandera2 = True
-                print(ImagenAre + ": {}".format(m2))
-        
-        
-        if (bandera1 is True or bandera2 is True):  
-            if len(x[0]) == 2:
-                y = pre.split('y')
-                letraF = str(y[0])
-            else:
-                letraF = str(x[0])
+        # Condición para encontrar relación con la letra definida, el umbral establecido es menor a 0.9 y, obviamente, cercano a cero para mayor coincidencia
+        #prom = (m2+m3)/2
+        # print("Prom" + ": {}".format(m2))
+        print("\nDistancia con " + pre +": {}".format(m1))
+        # Función recomendada por mayor alernativa (mejor resultado para flotates)
+        # if (math.isclose(prom, umbral) or prom < umbral):
+        if (math.isclose(m1, umbral) or m1 > umbral2):
+    
+            letraF = letra # + ":" + str(m2)
             print("Letra:" + letraF)
-            break;
-        else:
-            print("No coincide :(")
-            #letraF = "Sin coincidencia"
+            #break
 
     return letraF
 

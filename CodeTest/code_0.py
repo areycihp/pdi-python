@@ -99,10 +99,10 @@ def algoritmo_region_bordes(imagen):
 # Tamaño de imagen
 def tamanio_imagen(nombre_imagen):
     cv.namedWindow(nombre_imagen, cv.WINDOW_NORMAL)
-    cv.resizeWindow(nombre_imagen, 500, 550)
+    cv.resizeWindow(nombre_imagen, 400, 400)
 
 # Adquisición de imagen (1)
-imagen = cv.imread('Images/Z.jpeg')
+imagen = cv.imread('Images/KBImages/N3.jpg')
 tamanio_imagen('Imagen original')
 cv.imshow('Imagen original', imagen)
 # Procesamiento de imagen
