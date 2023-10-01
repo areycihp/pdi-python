@@ -175,8 +175,8 @@ class Camara(BoxLayout):
 def calculoDistancia(imagenReal):
     m1 = 0
     letraF = ""
-    umbral = 0.9
-    umbral2 = 0.05
+    umbral = 0
+    # umbral2 = 0.05
 
     # Frame en "tiempo real", ya preprocesada
     imReal = cv2.imread("Images/NewImages/"+imagenReal +
@@ -184,6 +184,7 @@ def calculoDistancia(imagenReal):
 
     # Para cada imagen de la base de conocimientos (ya preprocesada)
     for pre in ls():
+        mylist = iter(ls())
         # Para comparación por letra (5 imágenes)
         x = pre.split("_")
         letra = x[0]
@@ -192,21 +193,29 @@ def calculoDistancia(imagenReal):
         # Compara con el conjunto de imágenes 
         im1 = cv2.imread("Images/PreImages/" + pre,
                              cv2.IMREAD_UNCHANGED)
-        m1 = cv2.matchShapes(imReal, im1, cv2.CONTOURS_MATCH_I2, 0)
+        
+        #Al obtener los contornos a manera más "detallada", permite observar distancias más espceíficas
+        ret, thresh = cv2.threshold(im1, 127, 255, 0)
+        ret, thresh2 = cv2.threshold(imReal, 127, 255, 0)
+        contours, hierarchy = cv2.findContours(
+            thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        cnt1 = contours[0]
+        contours2, hierarchy = cv2.findContours(
+            thresh2, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        cnt2 = contours2[0]
 
+        m1 = cv2.matchShapes(cnt1, cnt2, cv2.CONTOURS_MATCH_I2, 0)
+
+        #print("\nCon" + pre +": {}".format(m1))
+    
 
         # Condición para encontrar relación con la letra definida, el umbral establecido es menor a 0.9 y, obviamente, cercano a cero para mayor coincidencia
-        #prom = (m2+m3)/2
-        # print("Prom" + ": {}".format(m2))
-        print("\nDistancia con " + pre +": {}".format(m1))
         # Función recomendada por mayor alernativa (mejor resultado para flotates)
-        # if (math.isclose(prom, umbral) or prom < umbral):
-        if (math.isclose(m1, umbral) or m1 > umbral2):
-    
+        if (math.isclose(umbral, m1, abs_tol = 0.6)):
             letraF = letra # + ":" + str(m2)
-            print("Letra:" + letraF)
-            #break
-
+            
+            print("Letra identificada:" + letraF)
+            break
     return letraF
 
 

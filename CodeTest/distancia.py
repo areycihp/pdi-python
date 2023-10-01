@@ -23,7 +23,7 @@ def distancia(imagen, imagenComp):
     # im5 = cv.imread("Images/PreImages/"+ "B_5" +
     #                     ".jpg", cv.IMREAD_UNCHANGED)
 
-    m1 = cv.matchShapes(imagen,im1,cv.CONTOURS_MATCH_I2,0)
+    
     # m2 = cv.matchShapes(imagen,im2,cv.CONTOURS_MATCH_I2,0)
     # m3 = cv.matchShapes(imagen,im3,cv.CONTOURS_MATCH_I2,0)
     # m4 = cv.matchShapes(imagen,im4,cv.CONTOURS_MATCH_I2,0)
@@ -31,9 +31,20 @@ def distancia(imagen, imagenComp):
     
     # distancias = [imagenComp][]
     # print("Distancia entre:")
+    ret, thresh = cv.threshold(im1, 127, 255, 0)
+    ret, thresh2 = cv.threshold(imagen, 127, 255, 0)
+    contours, hierarchy = cv.findContours(
+        thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+    cnt1 = contours[0]
+    contours2, hierarchy = cv.findContours(
+        thresh2, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+    cnt2 = contours2[0]
 
+    m1 = cv.matchShapes(cnt1, cnt2, cv.CONTOURS_MATCH_I2, 0)
+    #cv.matchShapes(imagen,im1,cv.CONTOURS_MATCH_I2,0)
     # print("{}".format(m1) + ",")
-    print((m1),end=',')
+    print(imagenComp +":")
+    print((m1),end='\n')
     # print("\nImagen con imagen 2: {}".format(m2))
     # print("\nImagen con imagen 3: {}".format(m3))
     # print("\nImagen con imagen 4: {}".format(m4))
@@ -47,14 +58,14 @@ def ls(ruta='Images/PreImages/'):
     return [arch.name for arch in scandir(ruta) if arch.is_file()]
 
 # Distancias
-img = "O_3"
-imagen = cv.imread("Images/PreImages/"+ img +
+img = "frame3"
+imagen = cv.imread("Images/NewImages/"+ img +
                         ".jpg", cv.IMREAD_UNCHANGED)
 
-print(img)
+#print(img)
 for original in ls():
-        imagen = cv.imread("Images/PreImages/"+ img +
-                        ".jpg", cv.IMREAD_UNCHANGED)
+        # imagen = cv.imread("Images/PreImages/"+ img +
+        #                 ".jpg", cv.IMREAD_UNCHANGED)
         x = original.split(".")
         nombre = x[0]
         formato = x[1]
