@@ -182,13 +182,15 @@ def calculoDistancia(imagenReal):
     imReal = cv2.imread("Images/NewImages/"+imagenReal +
                         ".jpg", cv2.IMREAD_UNCHANGED)
 
+    
     # Para cada imagen de la base de conocimientos (ya preprocesada)
     for pre in ls():
-        mylist = iter(ls())
+        
         # Para comparación por letra (5 imágenes)
         x = pre.split("_")
         letra = x[0]
         numero = x[1]
+        
 
         # Compara con el conjunto de imágenes 
         im1 = cv2.imread("Images/PreImages/" + pre,
@@ -206,16 +208,17 @@ def calculoDistancia(imagenReal):
 
         m1 = cv2.matchShapes(cnt1, cnt2, cv2.CONTOURS_MATCH_I2, 0)
 
-        #print("\nCon" + pre +": {}".format(m1))
+        #print("\nCon: " + pre +": {}".format(m1))
     
 
-        # Condición para encontrar relación con la letra definida, el umbral establecido es menor a 0.9 y, obviamente, cercano a cero para mayor coincidencia
+        # Condición para encontrar relación con la letra definida, el umbral establecido es menor a 0.7 (de acuerdo con la media general) y, obviamente, cercano a cero para mayor coincidencia
         # Función recomendada por mayor alernativa (mejor resultado para flotates)
-        if (math.isclose(umbral, m1, abs_tol = 0.6)):
-            letraF = letra # + ":" + str(m2)
-            
+        if (math.isclose(umbral, m1, abs_tol = 0.7)):
+        
+            letraF = letra
             print("Letra identificada:" + letraF)
-            break
+            
+            #break
     return letraF
 
 
